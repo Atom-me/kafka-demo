@@ -9,7 +9,7 @@ import java.util.Properties;
 /**
  * @author Atom
  */
-public class SimpleProducer0 {
+public class SimpleProducer0_oldApi {
     /**
      * 使用 console 消费者消费消息
      * kafka-console-consumer.sh --zookeeper 192.168.56.101 --topic test3 --from-beginning
