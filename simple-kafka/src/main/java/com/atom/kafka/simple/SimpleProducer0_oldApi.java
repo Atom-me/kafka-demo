@@ -1,4 +1,4 @@
-package com.atom.kafka;
+package com.atom.kafka.simple;
 
 import kafka.javaapi.producer.Producer;
 import kafka.producer.KeyedMessage;
