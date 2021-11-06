@@ -15,7 +15,7 @@ import java.util.Properties;
 /**
  * @author Atom
  */
-public class SimpleConsumer1 {
+public class SimpleKafkaConsumer_oldApi {
 
     /**
      * 可以使用 控制台生产者，生产消息
