@@ -1,11 +1,10 @@
 package com.atom.kafka.simple;
 
-import org.apache.kafka.clients.producer.KafkaProducer;
-import org.apache.kafka.clients.producer.Producer;
-import org.apache.kafka.clients.producer.ProducerConfig;
-import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.kafka.clients.producer.*;
 
 import java.util.Properties;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 /**
  * @author Atom
@@ -17,7 +16,7 @@ public class SimpleKafkaProducer {
      *
      * @param args
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ExecutionException, InterruptedException {
         Properties props = new Properties();
         // 生产者三个属性必须指定（broker清单、key序列化器、value序列化器）
         props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "192.168.56.101:9092,192.168.56.102:9092,192.168.56.103:9092");
