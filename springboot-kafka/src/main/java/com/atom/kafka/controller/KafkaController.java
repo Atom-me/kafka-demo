@@ -2,6 +2,8 @@ package com.atom.kafka.controller;
 
 import com.atom.kafka.KafkaMessage;
 import com.atom.kafka.KafkaProducer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -15,6 +17,8 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RestController
 @RequestMapping(value = "/kafka", produces = APPLICATION_JSON_VALUE)
 public class KafkaController {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(KafkaController.class);
 
     @Resource
     private KafkaProducer kafkaProducer;
@@ -31,7 +35,8 @@ public class KafkaController {
     public KafkaMessage sendKafkaMessage(@RequestParam(name = "id") Long id,
                                          @RequestParam(name = "username") String username,
                                          @RequestParam(name = "password") String password) {
-        System.out.println("sendKafkaMessage invoked!");
+        LOGGER.info("sendKafkaMessage invoked!");
+
         KafkaMessage kafkaMessage = new KafkaMessage();
         kafkaMessage.setId(id);
         kafkaMessage.setUsername(username);
@@ -54,7 +59,8 @@ public class KafkaController {
      */
     @RequestMapping(value = "/message2", method = RequestMethod.POST)
     public KafkaMessage sendKafkaMessage2(@RequestBody KafkaMessage kafkaMessage) {
-        System.out.println("sendKafkaMessage2 invoked!");
+        LOGGER.info("sendKafkaMessage2 invoked!");
+        
         kafkaMessage.setDate(new Date());
 
         this.kafkaProducer.sendKafkaMessage(kafkaMessage);

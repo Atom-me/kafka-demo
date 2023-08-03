@@ -1,10 +1,13 @@
 spring:
   kafka:
     producer:
-      bootstrap-servers: 192.168.56.101:9092,192.168.56.102:9092,192.168.56.103:9092
+#      bootstrap-servers: 192.168.56.101:9092,192.168.56.102:9092,192.168.56.103:9092
+      bootstrap-servers: 47.92.253.131:9092
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
     consumer:
-      bootstrap-servers: 192.168.56.101:9092,192.168.56.102:9092,192.168.56.103:9092
+#      bootstrap-servers: 192.168.56.101:9092,192.168.56.102:9092,192.168.56.103:9092
+      bootstrap-servers: 47.92.253.131:9092
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    bootstrap-servers: 47.92.253.131:9092
