@@ -1,0 +1,11 @@
+spring:
+  kafka:
+    bootstrap-servers: 47.92.253.131:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.ByteArraySerializer
+      value-serializer: org.apache.kafka.common.serialization.ByteArraySerializer
+
+
+kafka:
+  topic: file_topic
+  chunk-size: 512000  # 500KB

@@ -1,0 +1,14 @@
+spring:
+  kafka:
+    bootstrap-servers: 47.92.253.131:9092
+    consumer:
+      group-id: file-group
+      key-deserializer: org.apache.kafka.common.serialization.ByteArrayDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.ByteArrayDeserializer
+
+kafka:
+  topic: file_topic
+  consumer:
+    output-path: /Users/atom/temp/output/
+server:
+  port: 8088
