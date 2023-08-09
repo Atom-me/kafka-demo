@@ -7,6 +7,8 @@ spring:
       group-id: test-group
       enable-auto-commit: false
     bootstrap-servers: 47.92.253.131:9092
+    listener:
+      ack-mode: manual
 
 server:
   port: 8081

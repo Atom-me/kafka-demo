@@ -72,5 +72,7 @@ public class KafkaConsumer {
         System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
         System.out.println("Topic: " + topic + " Received Message:" + message + " from partition:" + partition);
         System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+        acknowledgment.acknowledge();
+
     }
 }
