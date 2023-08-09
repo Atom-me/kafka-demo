@@ -129,5 +129,15 @@ public class KafkaFileProducer implements ApplicationRunner {
         public void setChunkSize(int chunkSize) {
             this.chunkSize = chunkSize;
         }
+
+        @Override
+        public String toString() {
+            return "ChunkMetadata{" +
+                    "fileName='" + fileName + '\'' +
+                    ", chunkOrder=" + chunkOrder +
+                    ", totalChunks=" + totalChunks +
+                    ", chunkSize=" + chunkSize +
+                    '}';
+        }
     }
 }

@@ -65,6 +65,7 @@ public class KafkaFileConsumer {
     private void reassembleFile(String fileName) {
         String newFilePath = outputPath + fileName;
         try (FileOutputStream outputStream = new FileOutputStream(newFilePath)) {
+            // 按顺序拼接
             for (int i = 0; i < totalChunks; i++) {
                 byte[] chunkData = chunksMap.get(i);
                 outputStream.write(chunkData);
