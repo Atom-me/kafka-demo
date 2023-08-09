@@ -77,7 +77,6 @@ public class KafkaFileConsumer {
         } finally {
             chunksMap.clear();
             totalChunks = -1;
-            fileName = null;
         }
     }
 
