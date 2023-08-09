@@ -4,6 +4,7 @@ import com.atom.kafka.model.Greeting;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.annotation.TopicPartition;
+import org.springframework.kafka.support.Acknowledgment;
 import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
@@ -16,8 +17,8 @@ import org.springframework.kafka.support.KafkaHeaders;
 @Component
 public class KafkaConsumer {
 
-    @KafkaListener(topics = "m_topic", groupId = "${spring.kafka.consumer.group-id}")
-    public void obtainMessage(ConsumerRecord<String, String> consumerRecord) {
+    @KafkaListener(topics = "m_topic", groupId = "${spring.kafka.consumer.group-id}",containerFactory = "stringKafkaListenerContainerFactory")
+    public void obtainMessage(ConsumerRecord<String, String> consumerRecord, Acknowledgment acknowledgment) {
         System.out.println("obtainMessage invoked");
 
         String topic = consumerRecord.topic();
@@ -33,23 +34,30 @@ public class KafkaConsumer {
         System.out.println("timestamp: " + timestamp);
         System.out.println("=================================");
 
+        acknowledgment.acknowledge();
+
 
     }
 
-    @KafkaListener(topics = "g_topic")
-    public void greetingMessage(Greeting greeting) {
+    @KafkaListener(topics = "g_topic",containerFactory = "greetingKafkaListenerContainerFactory")
+    public void greetingMessage(Greeting greeting,Acknowledgment acknowledgment) {
         System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
         System.out.println(greeting);
         System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+        acknowledgment.acknowledge();
+
 
     }
 
 
     @KafkaListener(topics = "f_topic", containerFactory = "filterKafkaListenerContainerFactory")
-    public void listenWithFilter(String message) {
+    public void listenWithFilter(String message,Acknowledgment acknowledgment) {
         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
         System.out.println("Received Message in filtered listener: " + message);
         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+
+        acknowledgment.acknowledge();
+
     }
 
 
@@ -60,7 +68,7 @@ public class KafkaConsumer {
      * @param partition
      */
     @KafkaListener(topicPartitions = @TopicPartition(topic = "${partitioned.topic.name}", partitions = {"0", "3"}), containerFactory = "partitionsKafkaListenerContainerFactory")
-    public void listenToPartition(@Payload String message, @Header(KafkaHeaders.RECEIVED_TOPIC) String topic, @Header(KafkaHeaders.RECEIVED_PARTITION_ID) int partition) {
+    public void listenToPartition(@Payload String message, @Header(KafkaHeaders.RECEIVED_TOPIC) String topic, @Header(KafkaHeaders.RECEIVED_PARTITION_ID) int partition,Acknowledgment acknowledgment) {
         System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
         System.out.println("Topic: " + topic + " Received Message:" + message + " from partition:" + partition);
         System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");

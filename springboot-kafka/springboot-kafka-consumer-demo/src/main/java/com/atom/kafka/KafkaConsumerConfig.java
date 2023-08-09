@@ -10,6 +10,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
+import org.springframework.kafka.listener.ConsumerProperties;
+import org.springframework.kafka.listener.ContainerProperties;
 import org.springframework.kafka.support.converter.RecordMessageConverter;
 import org.springframework.kafka.support.converter.StringJsonMessageConverter;
 import org.springframework.kafka.support.mapping.DefaultJackson2JavaTypeMapper;
@@ -45,7 +47,14 @@ public class KafkaConsumerConfig {
     public ConcurrentKafkaListenerContainerFactory<String, String> kafkaListenerContainerFactory(String groupId) {
         ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory(groupId));
+        factory.getContainerProperties().setAckMode(ContainerProperties.AckMode.MANUAL);
+        System.err.println(factory.getContainerProperties());
         return factory;
+    }
+
+    @Bean
+    public ConcurrentKafkaListenerContainerFactory<String, String> stringKafkaListenerContainerFactory() {
+        return kafkaListenerContainerFactory("string");
     }
 
     @Bean
@@ -63,6 +72,7 @@ public class KafkaConsumerConfig {
     public ConcurrentKafkaListenerContainerFactory<String, String> filterKafkaListenerContainerFactory() {
         ConcurrentKafkaListenerContainerFactory<String, String> factory = kafkaListenerContainerFactory("filter");
         factory.setRecordFilterStrategy(record -> record.value().contains("World"));
+        factory.getContainerProperties().setAckMode(ContainerProperties.AckMode.MANUAL);
         return factory;
     }
 
@@ -77,6 +87,7 @@ public class KafkaConsumerConfig {
     public ConcurrentKafkaListenerContainerFactory<String, Greeting> greetingKafkaListenerContainerFactory() {
         ConcurrentKafkaListenerContainerFactory<String, Greeting> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(greetingConsumerFactory());
+        factory.getContainerProperties().setAckMode(ContainerProperties.AckMode.MANUAL);
         return factory;
     }
 
@@ -108,6 +119,7 @@ public class KafkaConsumerConfig {
         ConcurrentKafkaListenerContainerFactory<String, Object> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(multiTypeConsumerFactory());
         factory.setMessageConverter(multiTypeConverter());
+        factory.getContainerProperties().setAckMode(ContainerProperties.AckMode.MANUAL);
         return factory;
     }
 }

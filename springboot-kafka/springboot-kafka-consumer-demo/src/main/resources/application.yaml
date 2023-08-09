@@ -5,6 +5,7 @@ spring:
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       group-id: test-group
+      enable-auto-commit: false
     bootstrap-servers: 47.92.253.131:9092
 
 server:
