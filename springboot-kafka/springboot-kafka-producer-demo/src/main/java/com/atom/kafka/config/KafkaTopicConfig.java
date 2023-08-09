@@ -22,4 +22,18 @@ public class KafkaTopicConfig {
                 .name("wikimedia_recentchange")
                 .build();
     }
+
+
+    /**
+     * 程序启动自动创建topic
+     *
+     * @return
+     */
+    @Bean
+    public NewTopic p_topic() {
+        return TopicBuilder
+                .name("p_topic")
+                .partitions(5)
+                .build();
+    }
 }

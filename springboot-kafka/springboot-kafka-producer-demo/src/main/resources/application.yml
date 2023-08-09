@@ -5,3 +5,29 @@ spring:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
     bootstrap-servers: 47.92.253.131:9092
+
+
+message:
+  topic:
+    name: m_topic
+
+
+greeting:
+  topic:
+    name: g_topic
+
+
+filtered:
+  topic:
+    name: f_topic
+
+
+partitioned:
+  topic:
+    name: p_topic
+
+
+multi:
+  type:
+    topic:
+      name: mt_topic
