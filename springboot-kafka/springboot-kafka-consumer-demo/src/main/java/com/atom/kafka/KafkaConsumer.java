@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class KafkaConsumer {
 
-    @KafkaListener(topics = "myTopic", groupId = "myGroup")
+    @KafkaListener(topics = "myTopic", groupId = "${spring.kafka.consumer.group-id}")
     public void obtainMessage(ConsumerRecord<String, String> consumerRecord) {
         System.out.println("obtainMessage invoked");
 
@@ -19,13 +19,13 @@ public class KafkaConsumer {
         String value = consumerRecord.value();
         int partition = consumerRecord.partition();
         long timestamp = consumerRecord.timestamp();
-
+        System.out.println("=================================");
         System.out.println("topic: " + topic);
         System.out.println("key: " + key);
         System.out.println("value: " + value);
         System.out.println("partition: " + partition);
         System.out.println("timestamp: " + timestamp);
-        System.out.println("=========================");
+        System.out.println("=================================");
 
 
     }

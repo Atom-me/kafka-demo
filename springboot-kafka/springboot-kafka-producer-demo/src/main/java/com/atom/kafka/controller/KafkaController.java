@@ -31,7 +31,7 @@ public class KafkaController {
      * @param password
      * @return
      */
-    @RequestMapping(value = "/message", method = RequestMethod.GET)
+    @GetMapping(value = "/message")
     public KafkaMessage sendKafkaMessage(@RequestParam(name = "id") Long id,
                                          @RequestParam(name = "username") String username,
                                          @RequestParam(name = "password") String password) {
@@ -57,10 +57,10 @@ public class KafkaController {
      * @param kafkaMessage
      * @return
      */
-    @RequestMapping(value = "/message2", method = RequestMethod.POST)
+    @PostMapping(value = "/message2")
     public KafkaMessage sendKafkaMessage2(@RequestBody KafkaMessage kafkaMessage) {
         LOGGER.info("sendKafkaMessage2 invoked!");
-        
+
         kafkaMessage.setDate(new Date());
 
         this.kafkaProducer.sendKafkaMessage(kafkaMessage);
