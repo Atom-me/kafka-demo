@@ -1,3 +1,5 @@
+
+# application.yaml里面 Kafka的配置没什么用，还需要在代码里面配置
 spring:
   kafka:
     producer:
