@@ -24,6 +24,11 @@ public class KafkaProducerConfig {
     @Value("${spring.kafka.bootstrap-servers}")
     private String bootstrapServers;
 
+    /**
+     * 监听器工厂配置
+     *
+     * @return
+     */
     @Bean
     public ProducerFactory<String, String> producerFactory() {
         Map<String, Object> configProps = new HashMap<>();
@@ -42,6 +47,11 @@ public class KafkaProducerConfig {
 
     // ==================================================================================================
 
+    /**
+     * 监听器工厂配置
+     *
+     * @return
+     */
     @Bean
     public ProducerFactory<String, Greeting> greetingProducerFactory() {
         Map<String, Object> configProps = new HashMap<>();
@@ -58,6 +68,11 @@ public class KafkaProducerConfig {
 
     // ==================================================================================================
 
+    /**
+     * 监听器工厂配置
+     *
+     * @return
+     */
     @Bean
     public ProducerFactory<String, Object> multiTypeProducerFactory() {
         Map<String, Object> configProps = new HashMap<>();
