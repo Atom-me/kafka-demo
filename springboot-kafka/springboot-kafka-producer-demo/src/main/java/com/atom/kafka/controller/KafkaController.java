@@ -62,6 +62,8 @@ public class KafkaController {
         kafkaProducer.sendMessageToFiltered("Hello Atom!");
         kafkaProducer.sendMessageToFiltered("Hello World!");
         kafkaProducer.sendMessageToFiltered("Hello Word!");
+
+        // 发送多种类型消息
         kafkaProducer.sendMulTypeMessages();
 
 
